@@ -42,5 +42,5 @@ captions_file=os.path.join(os.getcwd(),"data/captions.txt")
 transform=transforms.ToTensor()
 object=Flicker_dataset(root_dir=root_dir,captions_file=captions_file,
 transform=transform,build_vocab= False)
-print(object[0])
+print(object[0]) 
 """
