@@ -6,9 +6,10 @@ from torchvision import transforms
 import pandas as pd
 import torch
 import pickle
+
 """ in Flicker_dataset we are going to make the data callable so we 
     can get the image tensor transformed and get the numericalzed 
-    version of the  text  """
+    version of the  text """
 class Flicker_dataset(Dataset):
     def __init__(self,root_dir,captions_file,transform=None,freq_threshold=5,build_vocab=True):
         self.root_dir=root_dir  #the directory of the images 

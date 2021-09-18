@@ -47,6 +47,6 @@ class Vocabulary:
                 num_text.append(self.string_to_index[word])
             else: 
                 num_text.append(self.string_to_index['<UNK>'])
-        return num_text
+        return  num_text
 
 
