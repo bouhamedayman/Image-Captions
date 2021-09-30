@@ -11,7 +11,7 @@ import pickle
     can get the image tensor transformed and get the numericalzed 
     version of the  text """
 class Flicker_dataset(Dataset):
-    def __init__(self,root_dir,captions_file,transform=None,freq_threshold=5,build_vocab=True):
+    def __init__(self,root_dir,captions_file,transform=None,freq_threshold=5,build_vocab=False):
         self.root_dir=root_dir  #the directory of the images 
         self.freq_threshold=freq_threshold
         self.df=pd.read_csv(captions_file)
@@ -36,11 +36,12 @@ class Flicker_dataset(Dataset):
         numericalized_caption=[self.vocabulary.string_to_index["<SOS>"]]
         numericalized_caption+=self.vocabulary.numericalize(caption)
         numericalized_caption+=[self.vocabulary.string_to_index["<EOS>"]]
-        return  image    ,   torch.tensor(numericalized_caption)
+        return  image,torch.tensor(numericalized_caption)
 """root_dir=os.path.join(os.getcwd(),'data/Flicker8k_Dataset')
 captions_file=os.path.join(os.getcwd(),"data/captions.txt")
 transform=transforms.ToTensor()
 object=Flicker_dataset(root_dir=root_dir,captions_file=captions_file,
 transform=transform,build_vocab= False)
-print(object[0]) 
-"""
+a,b=object[0]
+print(a.unsqueeze(0).shape)
+print(b.shape)"""
