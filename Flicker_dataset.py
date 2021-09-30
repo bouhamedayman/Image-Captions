@@ -36,7 +36,7 @@ class Flicker_dataset(Dataset):
         numericalized_caption=[self.vocabulary.string_to_index["<SOS>"]]
         numericalized_caption+=self.vocabulary.numericalize(caption)
         numericalized_caption+=[self.vocabulary.string_to_index["<EOS>"]]
-        return  image,torch.tensor(numericalized_caption)
+        return  (image,torch.tensor(numericalized_caption))
 """root_dir=os.path.join(os.getcwd(),'data/Flicker8k_Dataset')
 captions_file=os.path.join(os.getcwd(),"data/captions.txt")
 transform=transforms.ToTensor()
@@ -44,4 +44,5 @@ object=Flicker_dataset(root_dir=root_dir,captions_file=captions_file,
 transform=transform,build_vocab= False)
 a,b=object[0]
 print(a.unsqueeze(0).shape)
-print(b.shape)"""
+print(b.shape)
+print(len(object.vocabulary))"""
