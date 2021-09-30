@@ -72,9 +72,3 @@ class RCNN(pl.LightningModule):
 
     
         
- 
-#model=RCNN(20,2994,20,1,train_cnn=False)
-#trainer=pl.Trainer(fast_dev_run=False,gpus=1)
-#trainer.fit(model)
-#b=torch.randint((30,2))
-#model(torch.rand((2,3,299,299)),b)

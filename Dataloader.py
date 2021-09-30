@@ -36,10 +36,3 @@ def get_loader(root_dir,captions_file,transform,batch_size=2, num_workers=1,shuf
     pin_memory=pin_memory,num_workers=num_workers,shuffle=shuffle,
     collate_fn=Collate(pad_idx=pad_id),drop_last=True)
     return dataloader
-""""root_dir=os.path.join(os.getcwd(),'data/Flicker8k_Dataset')
-captions_file=os.path.join(os.getcwd(),"data/captions.txt")
-loader=get_loader(root_dir=root_dir,captions_file=captions_file,transform=transform)
-from tqdm import tqdm
-for x in (tqdm(loader,total=len(loader),leave=False)):
-    break
-print(x[1].shape)"""""
