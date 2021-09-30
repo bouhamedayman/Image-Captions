@@ -67,7 +67,20 @@ class RCNN(pl.LightningModule):
         dataloader=get_loader(root_dir=root_dir,captions_file=captions_file,transform=transform)
         return   dataloader #return the data loader 
       
-        
+    def caption_image(self,image,vocabulary,max_length):#create a fonction to test with it 
+        result_caption=[]#the resulted caption
+        with torch.no_grad():#don't update weigths
+            x=self.encoder(image).unsqueeze(0)#unsqueeze the feature 
+            states=None
+            for _ in range(max_length):#over all lstm states 
+                hiddens,states=self.decoder.lstm(x,states)#pass the feature through the lstm and update the state
+                output=self.decoder.linear(hiddens.squeeze(0))#pass the result through the linear model 
+                predicted=output.argmax(1)#which word of all words have the max probability 
+                result_caption.append(predicted.item())#get the index of the predicted word
+                x=self.decoder.embed(predicted).unsqueeze(0)
+                if vocabulary.index_to_string[predicted.item()]=="<EOS>":
+                    break#break if end of sentence predicted
+        return [vocabulary.index_to_string[idx] for idx in result_caption]#return the predicted caption     
     
 
     
